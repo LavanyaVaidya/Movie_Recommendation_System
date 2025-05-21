@@ -1,52 +1,40 @@
-# 🎬 Movie Recommendation System
+# Collaborative Filtering Recommender System
 
-This project implements a **movie recommendation system** using:
-- **User-Based Collaborative Filtering**
-- **Item-Based Collaborative Filtering**
-- **Cosine Similarity**
-
-It is built using **Python**, **pandas**, and **scikit-learn**, with optimizations to handle large datasets.
+This project implements **User-based** and **Item-based Collaborative Filtering** using **Cosine Similarity** on a movie rating dataset.
 
 ---
 
-## 📁 Dataset
+## Dataset
 
-We use the [MovieLens dataset](https://grouplens.org/datasets/movielens/) which contains:
-
-- `movies.csv`: Information about movies (movieId, title, genres)
-- `ratings.csv`: User ratings of movies (userId, movieId, rating, timestamp)
-
-> ⚠️ If working with the full dataset (27M+ ratings), memory optimizations are included to prevent RAM issues.
-
----
-
-## 💡 How it Works
-
-### ✅ User-Based Collaborative Filtering
-- Compares users to find similar taste profiles using **cosine similarity**.
-- Predicts ratings for a user based on ratings from similar users.
-- Output: Movie recommendations personalized to the target user.
-
-### ✅ Item-Based Collaborative Filtering
-- Compares movies based on how similar users rated them.
-- Predicts ratings by looking at how similar movies were rated by a user.
-- Output: Movies similar to those a user already liked.
+- `movies.csv`: Contains movie metadata with columns:
+  - `movieId`
+  - `title`
+  - `genres`
+  
+- `ratings.csv`: Contains user ratings with columns:
+  - `userId`
+  - `movieId`
+  - `rating`
+  - `timestamp`
 
 ---
 
-## ⚙️ Technologies Used
+## Approach
 
-- Python 3.x
-- pandas
-- numpy
-- scikit-learn (for cosine similarity)
-- scipy (for sparse matrices)
+1. **Filter top 500 users by `userId` (ascending)** to reduce dataset size and computational cost.
+2. Select movies rated by these users.
+3. Create a user-item rating matrix.
+4. Calculate cosine similarity matrices:
+   - User-User similarity for user-based collaborative filtering.
+   - Item-Item similarity for item-based collaborative filtering.
+5. Generate recommendations based on these similarity matrices.
 
 ---
 
-## 🧪 How to Run
+## How to Run
 
-1. Clone the repo:
-   ```bash
-   git clone https://github.com/your-username/movie-recommender
-   cd movie-recommender
+1. Ensure you have Python 3.x installed.
+2. Install required libraries:
+
+```bash
+pip install pandas scikit-learn
